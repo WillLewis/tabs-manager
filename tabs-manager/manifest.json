@@ -11,5 +11,9 @@
 
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+
+  "permissions": ["tabs", "activeTab", "tabGroups"],
+
+  "host_permissions": ["http://*/*", "https://*/*"]
 }
