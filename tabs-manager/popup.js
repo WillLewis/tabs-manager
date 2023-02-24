@@ -11,8 +11,9 @@ for (const tab of tabs) {
   const element = template.content.firstElementChild.cloneNode(true);
 
   const title = tab.title.split("-")[0].trim();
+
   const pathname =
-    tab.url.pathname.split("/").slice(-1)[0] === ""
+    new URL(tab.url).pathname.split("/").slice(-1)[0] === ""
       ? new URL(tab.url).pathname.split("/").slice(-2)[0]
       : new URL(tab.url).pathname.split("/").slice(-1)[0];
 
@@ -28,10 +29,23 @@ for (const tab of tabs) {
 }
 document.querySelector("ul").append(...elements);
 
+const nameInput = document.getElementById("userinput").value;
+
+const submit = document.getElementById("save");
+save.addEventListener("click", () => {
+  chrome.storage.sync.set({ nameInput });
+});
+
+const data = await chrome.storage.sync.get("nameInput");
+console.log(data.value);
+
+function store(input){
+    
+}
 //creates button that groups tabs and moves them into current window
 const button = document.querySelector("button");
 button.addEventListener("click", async () => {
   const tabIds = tabs.map(({ id }) => id);
   const group = await chrome.tabs.group({ tabIds });
-  await chrome.tabGroups.update(group, { title: "DOCS" });
+  await chrome.tabGroups.update(group, { title: data.value });
 });

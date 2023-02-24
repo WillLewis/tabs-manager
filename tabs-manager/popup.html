@@ -17,6 +17,20 @@
     </template>
 
     <h1>Tab Grouper</h1>
+    <form id="nameForm">
+      <label for="userinput"> Name (2 to 15 chars):</label>
+      <input
+        type="text"
+        id="userinput"
+        name="userinput"
+        required
+        minlength="2"
+        maxlength="15"
+        size="18"
+      />
+      <div id="status"></div>
+      <button id="save">Save</button>
+    </form>
     <button>Group Tabs</button>
     <ul></ul>
 
